@@ -1,0 +1,32 @@
+{
+  "name": "vef2-2025-v1-synilausn",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "run-s build:*",
+    "build:clean": "rimraf dist",
+    "build:generate": "node src/generate.js",
+    "build:copy-public": "cpy public dist --flat",
+    "dev": "browser-sync start --serveStatic ./dist --server --files ./dist/*.* ./dist/*.*",
+    "lint": "eslint src",
+    "test": "node --test --experimental-test-module-mocks",
+    "test:watch": "node --test --watch --experimental-test-module-mocks",
+    "test:coverage": "node --test --experimental-test-coverage --experimental-test-module-mocks"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "browser-sync": "^3.0.3",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "cpy-cli": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^6.0.1"
+  }
+}

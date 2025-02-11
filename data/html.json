@@ -1,0 +1,95 @@
+{
+  "title": "HTML",
+  "questions": [
+    {
+      "question": "Ef við værum að smíða vefsíðu og myndum vilja geta farið frá index.html yfir á about.html, hvað væri best að nota?",
+      "answers": [
+        {
+          "answer": "<a href=\"about.html\">About</a>",
+          "correct": true
+        },
+        {
+          "answer": "<form method=\"get\" action=\"about.html\"><button>About</button></form>",
+          "correct": false
+        },
+        {
+          "answer": "<button to=\"about.html\">About</button>",
+          "correct": false
+        },
+        {
+          "answer": "Allar jafn góðar / All equally good",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Í <head> á vefjum setjum við <meta charset=\"utf-8\"> (eða það stafasett sem nota á), afhverju er það gert?",
+      "answers": [
+        {
+          "answer": "Þannig að stafir birtist rétt.",
+          "correct": true
+        },
+        {
+          "answer": "Skilgreining sem visual studio verður að hafa þannig að prettier virki rétt.",
+          "correct": false
+        },
+        {
+          "answer": "Skilgreining sem aXe krefur okkur um til að vefur verði aðgengilegur.",
+          "correct": false
+        },
+        {
+          "answer": "Ekkert af þessu.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Það sem við getum gert til að forrita aðgengilega vefi er",
+      "answers": [
+        {
+          "answer": " Allt af þessu.",
+          "correct": true
+        },
+        {
+          "answer": "Nota eingöngu lyklaborð við að skoða og nota vefinn.",
+          "correct": false
+        },
+        {
+          "answer": "Merkja form á aðgengilegan hátt.",
+          "correct": false
+        },
+        {
+          "answer": "Hafa tóman alt texta á myndum ef þær eru eingöngu til skrauts.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Hvað er merkingarfræði í sambandi við námsefnið?",
+      "answers": [
+        {
+          "answer": "Hvert HTML element hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.",
+          "correct": true
+        },
+        {
+          "answer": "Hvert HTML tag hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.",
+          "correct": false
+        },
+        {
+          "answer": "Hvert CSS eigindi hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.",
+          "correct": false
+        },
+        {
+          "answer": "Hver CSS selector hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Ógild spurning, ætti ég að birast?",
+      "answers": {
+        "foo": "bar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "title": "CSS",
+  "questions": [
+    {
+      "question": "Fyrir eftirfarandi HTML / for the following HTML:\n\n\n<div class=\"text\">\n  <h1 class=\"important text__title\">Halló heimur</p>\n</div>\n \n\nEr skilgreint CSS / there is defined CSS:\n\n\n.text {\n  font-size: 10px;\n  color: green;\n}\n\n.text .text__title {\n  font-size: 1.5em;\n}\n\n.important {\n  font-size: 2em;\n  color: red;\n}\n\n \n\nHvert af eftirfarandi er satt fyrir textann „Halló heimur“ eftir að búið er að reikna gildi?",
+      "answers": [
+        {
+          "answer": "font-size: 20px;, color: green;",
+          "correct": true
+        },
+        {
+          "answer": "font-size: 15px;, color: red;",
+          "correct": false
+        },
+        {
+          "answer": "font-size: 20px;, color: red;",
+          "correct": false
+        },
+        {
+          "answer": "font-size: 15px;, color: green;",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Ef við erum að nota nýtt gildi fyrir lit í CSS sem er ekki víst að sé stutt í öllum vöfrum, þá ættum við að",
+      "answers": [
+        {
+          "answer": "Skilgreina fallback gildi á undan nýja gildinu sem væri notað í stað þess ef það er ekki stutt",
+          "correct": true
+        },
+        {
+          "answer": "Skilgreina fallback gildi á eftir nýja gildinu sem væri notað í stað þess ef það er ekki stutt.",
+          "correct": false
+        },
+        {
+          "answer": "Setja upp JavaScript virkni sem bendir notanda á að sækja nýjann vafra sem styður gildið.",
+          "correct": false
+        },
+        {
+          "answer": "Þetta er ekki stutt í CSS.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Í verkefnum höfum við unnið með „containers“ og „items“ sem hugtök, hvað á það við?",
+      "answers": [
+        {
+          "answer": "„Flex container“ og „flex items; „grid container“ og „grid items“: greinarmunur á foreldri og börnum þegar flexbox og CSS grid er notað.",
+          "correct": true
+        },
+        {
+          "answer": "„Flex container“ og „flex items: greinarmunur á foreldri og börnum eingngu þegar flexbox er notað.",
+          "correct": false
+        },
+        {
+          "answer": "„Grid container“ og „grid items“: greinarmunur á foreldri og börnum eingöngu þegar grid er notað.",
+          "correct": false
+        },
+        {
+          "answer": "Hugtök sem eru notuð með `querySelectorAll`: „container“ er það element sem leitað er undir, „items“ það sem er skilað.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question": "Þegar við notum flexbox hvað af eftirfarandi er satt? Gerið ráð fyrir að skjal sé lesið frá vinstri til hægri.",
+      "answers": [
+        {
+          "answer": "Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á aðalás frá vinstri til hægri.",
+          "correct": true
+        },
+        {
+          "answer": "Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á aðalás frá vinstri til hægri.",
+          "correct": false
+        },
+        {
+          "answer": "Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á krossás frá vinstri til hægri.",
+          "correct": false
+        },
+        {
+          "answer": "Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á krossás frá vinstri til hægri.",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

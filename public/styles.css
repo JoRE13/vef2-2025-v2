@@ -1,0 +1,74 @@
+:root {
+  --font-base-size: 16px;
+  --font-base-family: system-ui, helvetica, arial, sans-serif;
+  --max-inline-size: 50rem;
+  --spacing: 1rem;
+
+  --color-correct: #bffbbf;
+  --color-incorrect: #fdbcb5;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  min-block-size: 100vh;
+  font-family: var(--font-base-family);
+  font-size: var(--font-base-size);
+}
+
+main {
+  display: grid;
+  align-content: flex-start;
+  grid-gap: calc(var(--spacing));
+  margin-inline: auto;
+  padding: var(--spacing);
+  inline-size: 100%;
+  max-inline-size: var(--max-inline-size);
+}
+
+h1,
+h2,
+p {
+  margin-block-end: var(--spacing);
+}
+
+.questions {
+  display: grid;
+  grid-gap: calc(var(--spacing) * 2);
+}
+
+.question__form {
+  display: grid;
+  grid-gap: var(--spacing);
+}
+
+.question__form button {
+  max-inline-size: fit-content;
+  padding-inline: var(--spacing);
+  padding-block: calc(var(--spacing) / 2);
+}
+
+.answer {
+  margin-inline: calc(var(--spacing) * -1);
+  padding-inline: var(--spacing);
+  padding-block: calc(var(--spacing) / 2);
+}
+
+.answer--correct {
+  background-color: var(--color-correct);
+}
+
+.answer--incorrect {
+  background-color: var(--color-incorrect);
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "title": "HTML",
+    "file": "html.json"
+  },
+  {
+    "title": "CSS",
+    "file": "css.json"
+  },
+  {
+    "title": "JavaScript",
+    "file": "js.json"
+  },
+  {
+    "title": "Ógild skrá",
+    "file": "invalid.json"
+  },
+  {
+    "foo": "ógild færsla"
+  },
+  {
+    "title": "Ógild gögn, ætti ég að birtast?",
+    "file": "corrupt.json"
+  }
+]
