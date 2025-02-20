@@ -1,5 +1,5 @@
 {
-  "name": "vef2-2025-v1-synilausn",
+  "name": "vef2-2025-v2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,17 +7,12 @@
     "node": "22"
   },
   "scripts": {
-    "build": "run-s build:*",
-    "build:clean": "rimraf dist",
-    "build:generate": "node src/generate.js",
-    "build:copy-public": "cpy public dist --flat",
-    "dev": "browser-sync start --serveStatic ./dist --server --files ./dist/*.* ./dist/*.*",
     "lint": "eslint src",
-    "test": "node --test --experimental-test-module-mocks",
-    "test:watch": "node --test --watch --experimental-test-module-mocks",
-    "test:coverage": "node --test --experimental-test-coverage --experimental-test-module-mocks",
+    "test": "cross-env NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 jest ./*.test.js",
+    "test:coverage": "cross-env NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 jest ./*.test.js --coverage",
     "setup": "node --env-file=.env ./src/setup.js",
-    "start": "node --env-file=.env ./src/app.js"
+    "start": "node --env-file=.env ./src/app.js",
+    "dev": "cross-env NODE_NO_WARNINGS=1 node --env-file=.env --watch-path=./src ./src/app.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -28,10 +23,12 @@
   },
   "dependencies": {
     "cpy-cli": "^5.0.0",
+    "cross-env": "^7.0.3",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
+    "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "pg": "^8.13.3",
     "rimraf": "^6.0.1",

@@ -63,7 +63,7 @@ async function setupDbFromFiles(db, logger) {
  * @param {import('./lib/logger.js').Logger} logger
  */
 async function setupData(db, logger) {
-    // Index file
+    // takes the index data files and inserts into categories table
     const indexFileData = await readFile(join(INPUT_DIR, 'index.json'));
     const index = parseIndexFile(indexFileData);
     logger.info('index file read');
@@ -79,7 +79,7 @@ async function setupData(db, logger) {
         await db.insertCategory(ctgValues);
     }
 
-    // Questions
+    // add to the questions table
     const categories = await db.getCategories();
     for (const ctg of questionCategoryFiles) {
         for (const q of ctg.questions) {
@@ -95,7 +95,7 @@ async function setupData(db, logger) {
         }
     }
 
-    // answers
+    // add to the answers table
     const questions = await db.getQuestions();
     for (const ctg of questionCategoryFiles){
         for (const q of ctg.questions) {

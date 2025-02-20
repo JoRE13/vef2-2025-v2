@@ -89,120 +89,129 @@ export class Database {
     }
   }
 
-  async insertCategory(ctgValues){
+  /**
+   * Inserts a category into the database
+   * @param {*} ctgValues name value and file value
+   * @returns true if succsessfull and null otherwise
+   */
+  async insertCategory(ctgValues) {
     const result = await this.query(
-        'INSERT INTO categories (name, file) VALUES ($1 , $2)',
-        ctgValues
+      'INSERT INTO categories (name, file) VALUES ($1 , $2)',
+      ctgValues
     );
     if (!result || result.rowCount !== 1) {
-        this.logger.warn('unable to insert category', { result, categories });
-        return false;
-      }
-      return true;
+      this.logger.warn('unable to insert category', { result, categories });
+      return false;
+    }
+    return true;
   }
 
-  async getCategories(){
+  /**
+   * Gets an array containing all rows in categories table
+   * @returns an array containing all rows in categories table null otherwoise
+   */
+  async getCategories() {
     const result = await this.query('SELECT * FROM categories');
     if (result && (result.rows?.length ?? 0) > 0) {
-        return result.rows;
+      return result.rows;
     }
     return null;
   }
 
-  async insertQuestion(questionValues){
+  async insertQuestion(questionValues) {
     const result = await this.query(
-        'INSERT INTO questions (text, categories_id) VALUES ($1 , $2)',
-        questionValues
+      'INSERT INTO questions (text, categories_id) VALUES ($1 , $2)',
+      questionValues
     );
     if (!result || result.rowCount !== 1) {
-        this.logger.warn('unable to insert question', { result, categories });
-        return false;
-      }
-      return true;
+      this.logger.warn('unable to insert question', { result, categories });
+      return false;
+    }
+    return true;
   }
 
-  async getQuestions(){
+  async getQuestions() {
     const result = await this.query('SELECT id, text FROM questions');
     if (result && (result.rows?.length ?? 0) > 0) {
-        return result.rows;
+      return result.rows;
     }
     return null;
   }
 
-  async insertAnswer(answerValues){
+  async insertAnswer(answerValues) {
     const result = await this.query(
-        'INSERT INTO answers (answer, correct, questions_id) VALUES ($1, $2, $3)',
-        answerValues
+      'INSERT INTO answers (answer, correct, questions_id) VALUES ($1, $2, $3)',
+      answerValues
     );
     if (!result || result.rowCount !== 1) {
-        this.logger.warn('unable to insert question', { result, categories });
-        return false;
-      }
-      return true;
+      this.logger.warn('unable to insert question', { result, categories });
+      return false;
+    }
+    return true;
   }
 
-  async getQuestionsAnswers(category){
+  async getQuestionsAnswers(category) {
     const qa = [];
     const result = await this.query(
-        `SELECT T1.*, T2.name
+      `SELECT T1.*, T2.name
         FROM public.questions AS T1 LEFT JOIN public.categories AS T2 ON T2.id = T1.categories_id
         WHERE name = $1`,
-        category
+      category
     );
     if (result && (result.rows?.length ?? 0) > 0) {
-        const questions = result.rows;
-        for (const q of questions) {
-            const ans = [];
-            const result = await this.query(
-                `
+      const questions = result.rows;
+      for (const q of questions) {
+        const ans = [];
+        const result = await this.query(
+          `
                 SELECT T1.*
                 FROM public.answers AS T1 LEFT JOIN public.questions AS T2 ON T2.id = T1.questions_id
                 WHERE T2.id = $1
                 `,
-                [q.id]
-            );
-            if (result && (result.rows?.length ?? 0) > 0) {
-                const answers = result.rows;
-                for(const a of answers) {
-                    const ansData = {
-                        answer: a.answer,
-                        correct: a.correct
-                    };
-                    ans.push(ansData);
-                }
-                const qData = {
-                    question: q.text,
-                    answers: ans
-                };
-                qa.push(qData);
-            }
+          [q.id]
+        );
+        if (result && (result.rows?.length ?? 0) > 0) {
+          const answers = result.rows;
+          for (const a of answers) {
+            const ansData = {
+              answer: a.answer,
+              correct: a.correct,
+            };
+            ans.push(ansData);
+          }
+          const qData = {
+            question: q.text,
+            answers: ans,
+          };
+          qa.push(qData);
         }
-        return qa;
+      }
+      return qa;
     }
     return null;
-    
-    
   }
 
-  async getCategoryID (name) {
-    const result = await this.query('SELECT id FROM categories WHERE name = $1', [name]);
+  async getCategoryID(name) {
+    const result = await this.query(
+      'SELECT id FROM categories WHERE name = $1',
+      [name]
+    );
     if (result && (result.rows?.length ?? 0) > 0) {
       return result.rows;
     }
     return null;
   }
 
-
-  async getQuestionID (text) {
-    const result = await this.query('SELECT id FROM questions WHERE text = $1', [text]);
+  async getQuestionID(text) {
+    const result = await this.query(
+      'SELECT id FROM questions WHERE text = $1',
+      [text]
+    );
     if (result && (result.rows?.length ?? 0) > 0) {
       return result.rows;
     }
     return null;
   }
-
-
-
 }
 
 /** @type {Database | null} */

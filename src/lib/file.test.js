@@ -1,53 +1,37 @@
-import assert from 'node:assert';
+import { describe, expect, it } from '@jest/globals';
+import { join } from 'path';
+import { direxists, readFile } from './file';
 
-import { before, describe, it, mock } from 'node:test';
+const testDir = './src/test/data';
 
-describe('file', (t) => {
-  let direxists, createDirIfNotExists, readFile;
-  before(async () => {
-    await import('node:fs/promises');
-
-    mock.module('node:fs/promises', {
-      namedExports: {
-        async stat(dir) {
-          return dir === 'exists'
-            ? { isDirectory: () => true }
-            : Promise.reject(new Error('ENOENT'));
-        },
-        async readFile(file) {
-          return file === 'exists' ? 'exists' : Promise.reject();
-        },
-        async mkdir(dir) {
-          return dir === 'does-not-exist'
-            ? Promise.resolve()
-            : Promise.reject(new Error('EEXIST'));
-        },
-      },
-    });
-    ({ direxists, createDirIfNotExists, readFile } = await import('./file.js'));
-  });
-
+describe('file', () => {
   describe('direxists', () => {
-    it('should return false if dir is falsy', async (t) => {
+    it('returns false if dir does not exist', async () => {
+      const result = await direxists('./does-not-exist');
+      expect(result).toBe(false);
+    });
+
+    it('returns true if dir does exist', async () => {
+      const result = await direxists(testDir);
+      expect(result).toBe(true);
+    });
+
+    it('returns false if no input', async () => {
       const result = await direxists('');
-      assert.strictEqual(result, false);
-    });
-
-    it('should return true if dir exists', async (t) => {
-      const result = await direxists('exists');
-      assert.strictEqual(result, true);
-    });
-
-    it('should return false if dir does not exist', async (t) => {
-      const result = await direxists('does-not-exist');
-      assert.strictEqual(result, false);
+      expect(result).toBe(false);
     });
   });
 
-  describe('createDirIfNotExists', () => {
-    it('should create directory if it does not exist', async () => {
-      const result = await createDirIfNotExists('does-not-exist');
-      assert.strictEqual(result, true);
+  describe('readFile', () => {
+    it('should return null for file that does not exist', async () => {
+      const result = await readFile('./does-not-exist');
+
+      expect(result).toEqual(null);
+    });
+
+    it('should return content of known file that does exist', async () => {
+      const result = await readFile(`${testDir}/1`);
+      expect(result).toContain('asdf');
     });
   });
 });

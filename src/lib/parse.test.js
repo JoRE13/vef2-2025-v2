@@ -1,72 +1,66 @@
-import assert from 'node:assert';
-import { describe, it } from 'node:test';
-import {
-  parseAnswers,
-  parseIndexFile,
-  parseIndexFileItem,
-  parseQuestionCategory,
-} from './parse.js';
+import { parseAnswers, parseIndexFile, parseIndexFileItem, parseQuestionCategory } from './parse.js';
 import './quiet-io.js';
 
 describe('parse', () => {
+  
   describe('parseIndexFileItem', () => {
-    it('should fail on non object input', () => {
+    test('should fail on non-object input', () => {
       const data = 'not an object';
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should fail on null input', () => {
+    test('should fail on null input', () => {
       const data = null;
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should fail on missing title', () => {
+    test('should fail on missing title', () => {
       const data = { file: 'file' };
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should fail on missing file', () => {
+    test('should fail on missing file', () => {
       const data = { title: 'title' };
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should fail on non string title', () => {
+    test('should fail on non-string title', () => {
       const data = { title: 42, file: 'file' };
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should fail on non string file', () => {
+    test('should fail on non-string file', () => {
       const data = { title: 'title', file: 42 };
       const result = parseIndexFileItem(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should pass on valid input', () => {
+    test('should pass on valid input', () => {
       const data = { title: 'title', file: 'file' };
       const result = parseIndexFileItem(data);
-      assert.deepStrictEqual(result, data);
+      expect(result).toEqual(data);
     });
   });
 
   describe('parseIndexFile', () => {
-    it('should fail on invalid JSON', () => {
+    test('should fail on invalid JSON', () => {
       const data = 'not json';
       const result = parseIndexFile(data);
-      assert.deepStrictEqual(result, []);
+      expect(result).toEqual([]);
     });
 
-    it('should fail on non array input', () => {
+    test('should fail on non-array input', () => {
       const data = '"not an array"';
       const result = parseIndexFile(data);
-      assert.deepStrictEqual(result, []);
+      expect(result).toEqual([]);
     });
 
-    it('should skip invalid items', () => {
+    test('should skip invalid items', () => {
       const data = JSON.stringify([
         { title: 'title', file: 'file' },
         'not an object',
@@ -74,17 +68,17 @@ describe('parse', () => {
         { title: 'title', file: 42 },
       ]);
       const result = parseIndexFile(data);
-      assert.deepStrictEqual(result, [{ title: 'title', file: 'file' }]);
+      expect(result).toEqual([{ title: 'title', file: 'file' }]);
     });
   });
 
   describe('parseAnswers', () => {
-    it('should not parse invalid answers', () => {
+    test('should not parse invalid answers', () => {
       const result = parseAnswers('not an array');
-      assert.deepStrictEqual(result, []);
+      expect(result).toEqual([]);
     });
 
-    it('should skip invalid answers', () => {
+    test('should skip invalid answers', () => {
       const data = [
         { answer: 'answer', correct: true },
         'not an object',
@@ -93,30 +87,30 @@ describe('parse', () => {
         { answer: 'answer', correct: 42 },
       ];
       const result = parseAnswers(data);
-      assert.deepStrictEqual(result, [{ answer: 'answer', correct: true }]);
+      expect(result).toEqual([{ answer: 'answer', correct: true }]);
     });
   });
 
   describe('parseQuestionCategory', () => {
-    it('should return null on invalid input', () => {
+    test('should return null on invalid input', () => {
       const data = 'not json';
       const result = parseQuestionCategory(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should return null on missing title', () => {
+    test('should return null on missing title', () => {
       const data = JSON.stringify({ questions: [] });
       const result = parseQuestionCategory(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should return null on missing questions', () => {
+    test('should return null on missing questions', () => {
       const data = JSON.stringify({ title: 'title' });
       const result = parseQuestionCategory(data);
-      assert.strictEqual(result, null);
+      expect(result).toBeNull();
     });
 
-    it('should parse a valid question category with extra data', () => {
+    test('should parse a valid question category with extra data', () => {
       const input = {
         title: 'title',
         questions: [
@@ -128,7 +122,8 @@ describe('parse', () => {
       };
       const data = JSON.stringify(input);
       const result = parseQuestionCategory(data);
-      assert.deepStrictEqual(result, input);
+      expect(result).toEqual(input);
     });
   });
+
 });
