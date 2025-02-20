@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="is">
+
+<head>
+  <meta charset="utf-8">
+  <title><%= locals.title ?? '' %> </title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <main>
+    <script type="module" src="/main.js"></script>
+    <header>
+      <h1><%= locals.title ?? '' %></h1>
+
+      <%- include('navigation') -%>
+    </header>

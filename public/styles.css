@@ -4,8 +4,8 @@
   --max-inline-size: 50rem;
   --spacing: 1rem;
 
-  --color-correct: #bffbbf;
-  --color-incorrect: #fdbcb5;
+  --true-ans: #000;
+  --wrong-ans: #000;
 }
 
 html {
@@ -25,16 +25,16 @@ body {
   min-block-size: 100vh;
   font-family: var(--font-base-family);
   font-size: var(--font-base-size);
+  justify-content: center;
 }
 
 main {
-  display: grid;
-  align-content: flex-start;
-  grid-gap: calc(var(--spacing));
-  margin-inline: auto;
-  padding: var(--spacing);
-  inline-size: 100%;
-  max-inline-size: var(--max-inline-size);
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 h1,
@@ -43,32 +43,164 @@ p {
   margin-block-end: var(--spacing);
 }
 
-.questions {
-  display: grid;
-  grid-gap: calc(var(--spacing) * 2);
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
 }
-
-.question__form {
-  display: grid;
-  grid-gap: var(--spacing);
-}
-
-.question__form button {
-  max-inline-size: fit-content;
-  padding-inline: var(--spacing);
-  padding-block: calc(var(--spacing) / 2);
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .answer {
-  margin-inline: calc(var(--spacing) * -1);
-  padding-inline: var(--spacing);
-  padding-block: calc(var(--spacing) / 2);
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--spacing);
+  justify-content: flex-end;
+  align-items: center;  
 }
 
-.answer--correct {
-  background-color: var(--color-correct);
+
+.answer p {
+  color: var(--wrong-ans);
 }
 
-.answer--incorrect {
-  background-color: var(--color-incorrect);
+.trueans p{
+  color: var(--true-ans);
+}
+
+a {
+  text-decoration: none;
+}
+
+li a {
+  color:slateblue;
+}
+
+li a:hover {
+  color: steelblue;
+  border-bottom: 1px solid steelblue;
+}
+
+.button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  width: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: inherit;
+  background-color: slateblue;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: steelblue;
+  
+}
+
+.qcards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+.qcard {
+  text-align: left;
+  width: 75%;
+  border-radius: 8px;
+  background-color: ghostwhite;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.qcard p {
+  margin-bottom: 0;
+}
+
+form {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  gap: 30px;
+  background-color: ghostwhite;
+  padding:20px ;
+  border-radius: 10px;
+}
+
+form > .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.field label {
+  margin-bottom: 10px;
+}
+
+option {
+  text-align: center;
+}
+select {
+  padding-top:5px ;
+  padding-bottom: 5px;
+}
+
+form > .answers {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+  overflow: auto;
+  resize: none;
+  height: 40px;
+  padding: 5px;
+}
+
+.answers > .field {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+
+input {
+  padding: 5px;
+}
+
+.answers input {
+  flex-grow: 1;
+}
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errors label {
+  color: #eb0d45;
+}
+
+.invalid label {
+  color: #eb0d45;
 }

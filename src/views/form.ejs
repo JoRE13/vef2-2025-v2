@@ -1,0 +1,44 @@
+<%- include('header') -%>
+<p> Hér getur þú skráð inn nýjar spurningar!</p>
+
+<% if (locals.errors?.length) { %>
+    <h3 class="errors__title">Villur við skráningu:</h3>
+    <ul class="errors">
+      <% locals.errors.forEach((error) => { %>
+        <li class="error"><label for="<%= error.param %>"><%= error.msg %></label></li>
+      <% }); %>
+    </ul>
+<% } %>
+
+
+<form method="post" action="/edit/add" class="form">
+    <div class="field<%= locals.isInvalid('categories', locals.errors) ? ' invalid' : '' %>">
+        <label>Flokkur:</label>
+        <select name="categories">
+            <option>--veldu flokk--</option>
+            <%for(const category of locals.categories) { %>
+                <option <%= (locals.data?.categories ?? '') === category.id.toString() ? 'selected' : ''  %> value="<%= category.id %>" > <%=category.name %> </option>
+            <% } %>
+        </select>
+    </div>
+    <div class="field<%= locals.isInvalid('question', locals.errors) ? ' invalid' : '' %> ">
+        <label>Spurning:</label>
+        <textarea type="text" name="question"> <%= (locals.data?.question ?? '') %> </textarea>
+    </div>
+    <div class="answers <%= locals.isInvalid('answer', locals.errors) || locals.isInvalid('correct', locals.errors) ? ' invalid' : '' %>">
+        <label>Svör:</label>
+        <% for(let i = 0; i<4; i++) {%>
+            <div class="field">
+                <input type="text" name="answer[]" value="<%= (locals.data?.answer[i]?? '') %>">
+                <select name="correct[]">
+                    <option> --Veldu sanngildi--</option>
+                    <option <%= (locals.data?.correct[i] ?? '') === '1' ? 'selected' : ''  %> value="1">Satt</option>
+                    <option <%= (locals.data?.correct[i] ?? '') === '0' ? 'selected' : ''  %> value="0">Ósatt</option>
+                </select>
+            </div>
+        <% } %>         
+    </div>
+    <button class="button">Bæta við spurningu</button>
+
+</form>
+<%- include('footer') -%>

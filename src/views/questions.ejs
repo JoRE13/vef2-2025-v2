@@ -1,0 +1,22 @@
+<%- include('header') -%>
+
+<div class="qcards">
+<% for(const question of locals.questions) {%>
+    <div class="qcard">
+        <p> <%- question.question.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/g, '<br>') %></p>
+        <% for(const answer of locals.shuffleArray(question.answers)){%>
+            <% if(answer.correct) { %>
+                <div class="answer trueans">
+            <%} else {%>
+                <div class="answer">
+            <% } %>
+            <p><%- answer.answer.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/g, '<br>') %></p>
+            <input type="checkbox">
+            </div>
+        <% } %>
+    </div>
+<% } %>
+</div>
+<a class="button show-ans"> Sýna svör</a>
+
+<%- include('footer') -%>

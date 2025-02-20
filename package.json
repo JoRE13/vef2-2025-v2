@@ -15,7 +15,9 @@
     "lint": "eslint src",
     "test": "node --test --experimental-test-module-mocks",
     "test:watch": "node --test --watch --experimental-test-module-mocks",
-    "test:coverage": "node --test --experimental-test-coverage --experimental-test-module-mocks"
+    "test:coverage": "node --test --experimental-test-coverage --experimental-test-module-mocks",
+    "setup": "node --env-file=.env ./src/setup.js",
+    "start": "node --env-file=.env ./src/app.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -26,7 +28,13 @@
   },
   "dependencies": {
     "cpy-cli": "^5.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^6.0.1"
+    "pg": "^8.13.3",
+    "rimraf": "^6.0.1",
+    "xss": "^1.0.15"
   }
 }

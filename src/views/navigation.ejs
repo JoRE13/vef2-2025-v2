@@ -1,0 +1,10 @@
+<ul>
+    <% const ctg = locals.categories %>
+    <% if (ctg) { %>
+        <li><a href="/">Heim</a></li>
+        <li><a href="/edit">Bæta við</a></li>
+        <% for(const category of ctg) { %>
+            <li><a href=<%= `/${category.file.split(".")[0]}` %> > <%= category.name %> </a></li>
+        <% }%>
+    <% } %>    
+</ul>
